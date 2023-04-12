@@ -1,5 +1,3 @@
-import { UserModule } from "./user/user-module.class";
-
 class HelloWorld {
     constructor() {}
 
@@ -8,12 +6,6 @@ class HelloWorld {
     }
 }
 
-// init UserModule
-
-const userModule = new UserModule();
-userModule.init()
-
-// say Hello
-
 const hello = new HelloWorld();
+
 hello.sayHello();
