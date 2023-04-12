@@ -1,1 +1,0 @@
-export type Permission = "all" | "limited" | "none" | "guest"
