@@ -1,0 +1,110 @@
+@use "../util/util" as *
+@use "../variables/variables" as *
+@use "sass:map" as map
+
+$column-gap: 0.5rem !default
+
+// css grid layout
+// css flex layout
+
+// grid
+// grid item
+
+// row, columns
+// column
+
+// tiles
+// tile
+
+$grid-columns-xs: ( name: "xs", "columns": 12, "size": $xs )
+$grid-columns-sm: ( name: "sm", "columns": 12, "size": $sm )
+$grid-columns-md: ( name: "md", "columns": 12, "size": $md )
+$grid-columns-xm: ( name: "xm", "columns": 12, "size": $xm )
+$grid-columns-lg: ( name: "lg", "columns": 12, "size": $lg )
+$grid-columns-xl: ( name: "xl", "columns": 12, "size": $xl )
+$grid-columns: ( $grid-columns-xs, $grid-columns-sm, $grid-columns-md, $grid-columns-xm, $grid-columns-lg, $grid-columns-xl )
+
+
+// mobile
+// tablet
+// desktop
+
+$grid-breakpoints: ( "mobile", "tablet", "desktop" )
+
+=column($device, $col)
+    .column-#{$device}-#{$col}
+        @content
+
+@each $device in ( "mobile", "tablet", "desktop" )
+    $from: map-get(map.get($breakpoints, $device), "from")
+    $until: map-get(map.get($breakpoints, $device), "until")
+    // @debug $device, $from, $until
+    @if $from and $until
+        +between($from, $until)
+            @for $i from 1 through 12
+                +column($device, $i)
+                    width: $i / 12 * 100%
+    @else if $from
+        +from($from)
+            @for $i from 1 through 12
+                +column($device, $i)
+                    width: $i / 12 * 100%
+    @else if $until
+        +until($until)
+            @for $i from 1 through 12
+                +column($device, $i)
+                    width: $i / 12 * 100%
+
+
+.grid, .row, .columns
+    --grid-columns: 12
+    --grid-gap: 16px
+    display: flex   
+    flex-flow: row wrap
+    margin: calc( 1rem / -2 ) calc( 1rem / -2 ) calc( 1rem / 2 )
+
+.column
+    flex-basis: auto
+    flex-grow: 0
+    flex-shrink: 1
+    padding: calc( 1rem / 2 )
+    // overflow: hidden
+
+
+@for $i from 1 through 12
+    .column-#{$i}
+        @extend .column
+        width: $i / 12 * 100%
+
+
+
+    // &:not(:only-child, :first-child, :last-child)
+    //     padding:0 0.5rem
+    // &:not(:only-child):first-child
+    //     padding-right: 0.5rem
+    // &:not(:only-child):last-child
+    //     padding-left: 0.5rem
+        
+
+
+// .row, .columns
+//     display: block
+    
+//     +mobile
+//         display: flex   
+//         margin-bottom: 1rem
+
+// .column
+//     display: block
+//     +mobile
+//         flex-basis: 0
+//         flex-grow: 1
+//         flex-shrink: 1
+//         &:not(:only-child, :first-child, :last-child)
+//             padding:0 0.5rem
+//         &:not(:only-child):first-child
+//             padding-right: 0.5rem
+//         &:not(:only-child):last-child
+//             padding-left: 0.5rem
+        
+
