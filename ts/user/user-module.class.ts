@@ -1,6 +1,7 @@
 import { UserManagement } from "./user-management";
 import { UserRole } from "./user-roles";
 import { User } from "./user.class";
+import { SuperAdmin } from "./user.super-admin.class";
 
 export class UserModule {
 
@@ -16,9 +17,12 @@ export class UserModule {
 
         adminRole.setPermission('all')
         admin.setRole(adminRole)
+
+        const superAdmin = new SuperAdmin({ name: 'Daza', surname: 'Development', age: 33 })
         
         this.userManagement = new UserManagement()
         this.userManagement.addUser(admin)
+        this.userManagement.addUser(superAdmin)
 
     }
 
