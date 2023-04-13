@@ -1,4 +1,4 @@
-import { UserModule } from "./user/user-module.class";
+import { UserModule } from "./components/user/user-module.class";
 
 class HelloWorld {
     constructor() {}
