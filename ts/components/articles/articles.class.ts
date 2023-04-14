@@ -1,6 +1,10 @@
-export class Articles {
+import { Component } from "../component.abstract";
+
+export class Articles extends Component {
     collection: Article[] = [];
-    constructor() {}
+    constructor() {
+        super()
+    }
     doSomething() {}
 }
 
